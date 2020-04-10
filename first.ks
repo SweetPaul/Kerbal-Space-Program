@@ -23,21 +23,20 @@ print "Launch!".
 //It lets the craft know, im in ground mode. now im in accent part one, then part two, etc... that way the script and logic can be broken up at the proper times
 //This could also make troubleshooting easier as the craft can announce what "runmode" number it is on. 
 
-until ship:verticalspeed > 100 { 
+until (ship:verticalspeed > 100 and altitude > 2000) { 
     If Stage:liquidfuel < 0.1 {
         Stage.
     }
     If Ship:altitude > 100 {
         lock steering to up + R(0,0,-90).
     }
-    
 }
 
 print "Beginning gravity turn.".
 //Blind "Gravity Turn". Would like to add logic that tells it to turn at a reasonable rate. Say, X distance off the center of the Prograde Vector (This is the ships true direction of velocity)
 //This would reduce how much drag the ship takes on during accent inside atmosphere. Once in space, the ship can rotate as fast as it can for the most part. 
 until apoapsis > 100200 {
-    lock steering to up + R(0,0,-90) + R(0,-45,0).
+    lock steering to up + R(0,-45,-90).
     If Stage:liquidfuel < 0.1 {
         Stage.
         Print "Stage seperated.".
